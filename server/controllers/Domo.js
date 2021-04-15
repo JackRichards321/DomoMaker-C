@@ -42,7 +42,7 @@ const makeDomo = (req, res) => {
   return domoPromise;
 };
 
-const getDomos = (reques, response) => {
+const getDomos = (request, response) => {
   const req = request;
   const res = response;
 
