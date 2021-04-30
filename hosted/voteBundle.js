@@ -1,60 +1,52 @@
 "use strict";
 
-var handleTot = function handleTot(e) {
-  e.preventDefault();
-  $("#totMessage").animate({
-    width: 'hide'
-  }, 350);
+var handleVote = function handleVote(e) {
+  e.preventDefault(); //$("#totMessage").animate({width: 'hide'}, 350);
 
-  if ($("#totItem1").val() == '' || $("#totItem2").val() == '') {
-    handleError("All fields are required");
+  if ($("#voteItem1").val() == '' && $("#voteItem2").val() == '') {
+    handleError("Choose one before submitting");
     return false;
-  } //if ($("#totItem1").val() == ) { cannot do repeat tots
-  //}
+  }
 
-
-  sendAjax('POST', $("#totForm").attr("action"), $("#totForm").serialize(), function () {
-    loadTotsFromServer();
+  sendAjax('POST', $("#voteForm").attr("action"), $("#voteForm").serialize(), function () {
+    loadTotFromServer();
   });
   return false;
 };
 
-var TotForm = function TotForm(props) {
+var VoteForm = function VoteForm(props) {
+  console.log(props);
   return (/*#__PURE__*/React.createElement("form", {
-      id: "totForm",
-      name: "totForm",
-      onSubmit: handleTot,
-      action: "/maker",
+      id: "voteForm",
+      name: "voteForm",
+      onSubmit: handleVote,
+      action: "/voter",
       method: "POST",
-      className: "totForm"
+      className: "voteForm"
     }, /*#__PURE__*/React.createElement("label", {
       htmlFor: "item1"
-    }, "Item 1: "), /*#__PURE__*/React.createElement("input", {
-      id: "totItem1",
-      type: "text",
+    }, props.item1), /*#__PURE__*/React.createElement("input", {
+      id: "voteItem1",
+      type: "radio",
       name: "item1",
       placeholder: "Tot Item 1"
     }), /*#__PURE__*/React.createElement("label", {
       htmlFor: "item2"
-    }, "Item 2: "), /*#__PURE__*/React.createElement("input", {
-      id: "totItem2",
-      type: "text",
+    }, props.item2), /*#__PURE__*/React.createElement("input", {
+      id: "voteItem2",
+      type: "radio",
       name: "item2",
       placeholder: "Tot Item 2"
     }), /*#__PURE__*/React.createElement("input", {
-      type: "hidden",
-      name: "_csrf",
-      value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
       className: "makeTotSubmit",
       type: "submit",
-      value: "Make Tot"
+      value: "Submit Vote!"
     }))
   );
 };
 
-var TotList = function TotList(props) {
-  if (props.tots.length === 0) {
+var VoteList = function VoteList(props) {
+  if (props.tot.length === 0) {
     return (/*#__PURE__*/React.createElement("div", {
         className: "totList"
       }, /*#__PURE__*/React.createElement("h3", {
@@ -63,7 +55,7 @@ var TotList = function TotList(props) {
     );
   }
 
-  var totNodes = props.tots.map(function (tot) {
+  var totNodes = function totNodes(tot) {
     return (/*#__PURE__*/React.createElement("div", {
         key: tot._id,
         className: "tot"
@@ -73,26 +65,27 @@ var TotList = function TotList(props) {
         classname: "totItem"
       }, " Item 2: ", tot.item2, " "))
     );
-  });
+  };
+
   return (/*#__PURE__*/React.createElement("div", {
       className: "totList"
     }, totNodes)
   );
 };
 
-var loadTotsFromServer = function loadTotsFromServer() {
-  sendAjax('GET', '/getTots', null, function (data) {
-    ReactDOM.render( /*#__PURE__*/React.createElement(TotList, {
-      tots: data.tots
+var loadTotFromServer = function loadTotFromServer() {
+  sendAjax('GET', '/getTot', null, function (data) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(VoteList, {
+      tot: data.tot
     }), document.querySelector("#tots"));
   });
 };
 
 var setup = function setup(csrf) {
-  ReactDOM.render( /*#__PURE__*/React.createElement(TotForm, {
+  ReactDOM.render( /*#__PURE__*/React.createElement(VoteForm, {
     csrf: csrf
-  }), document.querySelector("#makeTot"));
-  ReactDOM.render( /*#__PURE__*/React.createElement(TotList, {
+  }), document.querySelector("#voteTot"));
+  ReactDOM.render( /*#__PURE__*/React.createElement(VoteList, {
     tots: []
   }), document.querySelector("#tots"));
   loadTotsFromServer();

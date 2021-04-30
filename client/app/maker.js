@@ -1,84 +1,87 @@
-const handleDomo = (e) => {
+const handleTot = (e) => {
     e.preventDefault();
 
-    $("#domoMessage").animate({width: 'hide'}, 350);
+    $("#totMessage").animate({width: 'hide'}, 350);
 
-    if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
-        handleError("RAWR! All fields are required");
+    if ($("#totItem1").val() == '' || $("#totItem2").val() == '') {
+        handleError("All fields are required");
         return false;
     }
 
-    sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function() {
-        loadDomosFromServer();
+    //if ($("#totItem1").val() == ) { cannot do repeat tots
+
+    //}
+
+    sendAjax('POST', $("#totForm").attr("action"), $("#totForm").serialize(), function() {
+        loadTotsFromServer();
     });
 
     return false;
 };
 
-const DomoForm = (props) => {
+const TotForm = (props) => {
     return (
         <form 
-            id="domoForm" 
-            name="domoForm"
-            onSubmit={handleDomo}
+            id="totForm" 
+            name="totForm"
+            onSubmit={handleTot}
             action="/maker"
             method="POST"
-            className="domoForm"
+            className="totForm"
         >
-            <label htmlFor="name">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-            <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
+            <label htmlFor="item1">Item 1: </label>
+            <input id="totItem1" type="text" name="item1" placeholder="Tot Item 1"/>
+            <label htmlFor="item2">Item 2: </label>
+            <input id="totItem2" type="text" name="item2" placeholder="Tot Item 2"/>
             <input type="hidden" name="_csrf" value={props.csrf}/>
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeTotSubmit" type="submit" value="Make Tot" />
         </form>
     );
 };
 
-const DomoList = function(props) {
-    if (props.domos.length === 0) {
+const TotList = function(props) {
+    if (props.tots.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos yet</h3>
+            <div className="totList">
+                <h3 className="emptyTot">You haven't made any Tots yet</h3>
             </div>
         );
     }
 
-    const domoNodes = props.domos.map(function(domo) {
+    const totNodes = props.tots.map(function(tot) {
         return (
-            <div key={domo._id} className="domo">
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 classname="domoName"> Name: {domo.name} </h3>
-                <h3 classname="domoAge"> Age: {domo.age} </h3>
+            <div key={tot._id} className="tot">
+                <h3 classname="totItem"> Item 1: {tot.item1} </h3>
+                <h3 classname="totItem"> Item 2: {tot.item2} </h3>
             </div>
         );
     });
 
     return (
-        <div className="domoList">
-            {domoNodes}
+        <div className="totList">
+            {totNodes}
         </div>
     );
 };
 
-const loadDomosFromServer = () => {
-    sendAjax('GET', '/getDomos', null, (data) => {
+const loadTotsFromServer = () => {
+    sendAjax('GET', '/getTots', null, (data) => {
         ReactDOM.render(
-            <DomoList domos = {data.domos} />, document.querySelector("#domos")
+            <TotList tots = {data.tots} />, document.querySelector("#tots")
         );
     });
 };
 
 const setup = function(csrf) {
     ReactDOM.render(
-        <DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+        <TotForm csrf={csrf} />, document.querySelector("#makeTot")
     );
 
     ReactDOM.render(
-        <DomoList domos={[]} />, document.querySelector("#domos")
+        <TotList tots={[]} />, document.querySelector("#tots")
     );
 
-    loadDomosFromServer();
+    loadTotsFromServer();
 };
 
 const getToken = () => {
