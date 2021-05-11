@@ -15,7 +15,7 @@
     "buildLoginBundle": "babel ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
     "buildVoteBundle": "babel ./client/vote ./client/helper --presets @babel/preset-react --out-file ./hosted/voteBundle.js",
     "buildAppBundle": "babel ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js",
-    "build": "npm run buildLoginBundle && npm run buildAppBundle && run watchVoteBundle",
+    "build": "npm run buildLoginBundle && npm run buildAppBundle && run buildVoteBundle",
     "watchLoginBundle": "babel --watch ./client/login ./client/helper --presets @babel/preset-react --out-file ./hosted/loginBundle.js",
     "watchVoteBundle": "babel --watch ./client/vote ./client/helper --presets @babel/preset-react --out-file ./hosted/voteBundle.js",
     "watchAppBundle": "babel --watch ./client/app ./client/helper --presets @babel/preset-react --out-file ./hosted/bundle.js"

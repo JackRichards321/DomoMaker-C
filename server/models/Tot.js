@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+mongoose.set('useFindAndModify', false);
+
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
@@ -66,6 +68,7 @@ TotSchema.statics.toAPI = (doc) => ({
   item2: doc.item2,
   wins1: doc.wins1,
   wins2: doc.wins2,
+  id: doc.id,
 });
 
 TotSchema.statics.findByOwner = (ownerId, callback) => {
@@ -73,12 +76,10 @@ TotSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return TotModel.find(search).select('item1 item2').lean().exec(callback);
+  return TotModel.find(search).select('item1 item2 wins1 wins2').lean().exec(callback);
 };
 
-TotSchema.statics.findOne = (callback) => {
-  return TotModel.find().select('item1 item2').lean().exec(callback);
-};
+TotSchema.statics.findAll = (callback) => TotModel.find().select('item1 item2 wins1 wins2 id').lean().exec(callback);
 
 TotModel = mongoose.model('Tot', TotSchema);
 

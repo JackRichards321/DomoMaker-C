@@ -20,6 +20,7 @@ var handleTot = function handleTot(e) {
 };
 
 var TotForm = function TotForm(props) {
+  console.log(props);
   return (/*#__PURE__*/React.createElement("form", {
       id: "totForm",
       name: "totForm",
@@ -54,6 +55,8 @@ var TotForm = function TotForm(props) {
 };
 
 var TotList = function TotList(props) {
+  console.log(props);
+
   if (props.tots.length === 0) {
     return (/*#__PURE__*/React.createElement("div", {
         className: "totList"
@@ -68,10 +71,10 @@ var TotList = function TotList(props) {
         key: tot._id,
         className: "tot"
       }, /*#__PURE__*/React.createElement("h3", {
-        classname: "totItem"
-      }, " Item 1: ", tot.item1, " "), /*#__PURE__*/React.createElement("h3", {
-        classname: "totItem"
-      }, " Item 2: ", tot.item2, " "))
+        className: "totItem"
+      }, " Item 1: ", tot.item1, " | Wins: ", tot.wins1, " "), /*#__PURE__*/React.createElement("h3", {
+        className: "totItem"
+      }, " Item 2: ", tot.item2, " | Wins: ", tot.wins2, " "))
     );
   });
   return (/*#__PURE__*/React.createElement("div", {

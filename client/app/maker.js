@@ -20,6 +20,7 @@ const handleTot = (e) => {
 };
 
 const TotForm = (props) => {
+    console.log(props);
     return (
         <form 
             id="totForm" 
@@ -40,6 +41,7 @@ const TotForm = (props) => {
 };
 
 const TotList = function(props) {
+    console.log(props);
     if (props.tots.length === 0) {
         return (
             <div className="totList">
@@ -51,8 +53,8 @@ const TotList = function(props) {
     const totNodes = props.tots.map(function(tot) {
         return (
             <div key={tot._id} className="tot">
-                <h3 classname="totItem"> Item 1: {tot.item1} </h3>
-                <h3 classname="totItem"> Item 2: {tot.item2} </h3>
+                <h3 className="totItem"> Item 1: {tot.item1} | Wins: {tot.wins1} </h3>
+                <h3 className="totItem"> Item 2: {tot.item2} | Wins: {tot.wins2} </h3>
             </div>
         );
     });
