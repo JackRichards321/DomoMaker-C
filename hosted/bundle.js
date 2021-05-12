@@ -21,7 +21,9 @@ var handleTot = function handleTot(e) {
 
 var TotForm = function TotForm(props) {
   console.log(props);
-  return (/*#__PURE__*/React.createElement("form", {
+  return (/*#__PURE__*/React.createElement("section", {
+      id: "totFormSection"
+    }, /*#__PURE__*/React.createElement("form", {
       id: "totForm",
       name: "totForm",
       onSubmit: handleTot,
@@ -50,7 +52,7 @@ var TotForm = function TotForm(props) {
       className: "totButton",
       type: "submit",
       value: "Make Tot"
-    }))
+    })))
   );
 };
 

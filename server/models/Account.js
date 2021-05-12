@@ -28,8 +28,8 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  votedOn: {
-    type: Array,
+  votedOn: { // going to eventually use to identify which tots a user has voted on
+    type: Array, // so they can't vote on one multiple times
     required: true,
     default: []
   }

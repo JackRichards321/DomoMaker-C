@@ -257,14 +257,6 @@ h3.totAge {
     font-size: 1.5em;
 }
 
-.tot:first-child {
-    margin-top: 10px;
-}
-
-.tot:last-child {
-    margin-bottom:10px;
-}
-
 #ownerSection {
     display: flex;
     direction: row;
@@ -378,4 +370,8 @@ h3.totAge {
 
 #voteSubmitButton {
     height: 200px;
+}
+
+.totList {
+    height: 60%;
 }
