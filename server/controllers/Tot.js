@@ -26,6 +26,21 @@ const voterPage = (req, res) => {
   });
 };
 
+const adminPage = (req, res) => {
+  Tot.TotModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred. Code: 8' });
+    }
+
+    return res.render('admin', { csrfToken: req.csrfToken(), tots: docs });
+  });
+};
+
+const errorPage = (req, res) => {
+  return res.render('error');
+};
+
 const makeTot = (req, res) => {
   if (!req.body.item1 || !req.body.item2) {
     return res.status(400).json({ error: 'Both item1 and item2 are required' });
@@ -148,10 +163,47 @@ const getTot = (request, response) => {
 /*
 / To add: getAllTots for admin page
 */
+const getAllTots = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Tot.TotModel.findAll((err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred. Code: 7' });
+    }
+
+    // console.log("docs: ");
+    // console.log(docs);
+
+    return res.json({ csrfToken: req.csrfToken(), tots: docs });
+  });
+};
+
+const deleteTot = (request, response) => {
+  const req = request;
+  const res = response;
+
+  console.log("req.body: ");
+  console.log(req.body);
+
+  return Tot.TotModel.deleteOne({id: req.body._id}, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred. Code: 9' });
+    }
+
+    return res.json({ tots: docs });
+  });
+};
 
 module.exports.makerPage = makerPage;
 module.exports.getTots = getTots;
 module.exports.getTot = getTot;
+module.exports.getAllTots = getAllTots;
+module.exports.deleteTot = deleteTot;
 module.exports.make = makeTot;
 module.exports.voterPage = voterPage;
 module.exports.vote = voteTot;
+module.exports.adminPage = adminPage;
+module.exports.errorPage = errorPage;

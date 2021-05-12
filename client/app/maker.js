@@ -35,7 +35,7 @@ const TotForm = (props) => {
             <label htmlFor="item2">Item 2: </label>
             <input id="totItem2" type="text" name="item2" placeholder="Tot Item 2"/>
             <input type="hidden" name="_csrf" value={props.csrf}/>
-            <input className="makeTotSubmit" type="submit" value="Make Tot" />
+            <input className="totButton" type="submit" value="Make Tot" />
         </form>
     );
 };

@@ -75,8 +75,44 @@ const signup = (request, response) => {
         return res.status(400).json({ error: 'Username already in use.' });
       }
 
-      return res.status(400).json({ error: 'An error occurred' });
+      return res.status(400).json({ error: 'An error occurred. Code: 11' });
     });
+  });
+};
+
+/*
+/ ADDED - changePassword
+/ based on Pran R.V.'s answer at https://stackoverflow.com/questions/17828663/passport-local-mongoose-change-password
+/ changes a user's password if they have entered their current username and password
+*/
+const changePassword = (request, response) => {
+  const req = request;
+  const res = response;
+
+  console.log("req.body: ");
+  console.log(req.body);
+
+  Account.AccountModel.findByUsername(req.body.username, (err, user) => {
+    if (err) {
+      console.log(err)
+    } else {
+      if (!user) {
+        res.json({success: false, message: 'User not found' });
+      } else {
+        console.log("password change attempted");
+        user.changePassword(req.body.oldPass, req.body.newPass, function(err) {
+          if(err) {
+                   if(err.name === 'IncorrectPasswordError'){
+                        res.json({ success: false, message: 'Incorrect password' }); // Return error
+                   }else {
+                       res.json({ success: false, message: 'Something went wrong!! Please try again after sometimes.' });
+                   }
+         } else {
+           res.json({ success: true, message: 'Your password has been changed successfully' });
+          }
+        })
+      }
+    }
   });
 };
 
@@ -96,3 +132,4 @@ module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
+module.exports.changePassword = changePassword;

@@ -47,7 +47,7 @@ var TotForm = function TotForm(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement("input", {
-      className: "makeTotSubmit",
+      className: "totButton",
       type: "submit",
       value: "Make Tot"
     }))

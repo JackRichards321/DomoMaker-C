@@ -40,30 +40,39 @@ var handleVote = function handleVote(e) {
 var VoteForm = function VoteForm(props) {
   // console.log("voteForm props: ");
   // console.log(props);
-  return (/*#__PURE__*/React.createElement("form", {
+  return (/*#__PURE__*/React.createElement("section", {
+      id: "voteSection"
+    }, /*#__PURE__*/React.createElement("form", {
       id: "voteForm",
       name: "voteForm",
       onSubmit: handleVote,
       action: "/voter",
       method: "POST",
       className: "voteForm"
-    }, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "voteItem1"
-    }, props.tot.item1), /*#__PURE__*/React.createElement("input", {
+    }, /*#__PURE__*/React.createElement("input", {
       id: "voteItem1",
       type: "radio",
       name: "item",
       value: props.tot.item1,
       placeholder: "Tot Item 1"
     }), /*#__PURE__*/React.createElement("label", {
-      htmlFor: "voteItem2"
-    }, props.tot.item2), /*#__PURE__*/React.createElement("input", {
+      htmlFor: "voteItem1",
+      id: "voteLabel1"
+    }, props.tot.item1), /*#__PURE__*/React.createElement("input", {
+      className: "totButton",
+      id: "voteSubmitButton",
+      type: "submit",
+      value: "Submit Vote!"
+    }), /*#__PURE__*/React.createElement("input", {
       id: "voteItem2",
       type: "radio",
       name: "item",
       value: props.tot.item2,
       placeholder: "Tot Item 2"
-    }), /*#__PURE__*/React.createElement("input", {
+    }), /*#__PURE__*/React.createElement("label", {
+      htmlFor: "voteItem2",
+      id: "voteLabel2"
+    }, props.tot.item2), /*#__PURE__*/React.createElement("input", {
       type: "hidden",
       name: "item1",
       value: props.tot.item1
@@ -87,32 +96,62 @@ var VoteForm = function VoteForm(props) {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "makeTotSubmit",
-      type: "submit",
-      value: "Submit Vote!"
-    }))
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "totButton",
+      id: "seeAnotherButton",
+      onClick: getToken
+    }, "See Another ToT"))
   );
 };
 /*
 / ADDED - Results
-/ A React component that shows the current standings of a ToT
+/ A React function component that shows the current standings of a ToT
 */
 
 
 var Results = function Results(props) {
-  // console.log("props: ");
-  // console.log(props);
-  return (/*#__PURE__*/React.createElement("div", {
-      id: "results"
-    }, /*#__PURE__*/React.createElement("h3", null, props.props.item1, " wins: ", props.props.wins1), /*#__PURE__*/React.createElement("h3", null, props.props.item2, " wins: ", props.props.wins2))
-  );
+  console.log("props: ");
+  console.log(props);
+
+  if (props.props.item === props.props.item1) {
+    var wins1Num = parseInt(props.props.wins1);
+    return (/*#__PURE__*/React.createElement("div", {
+        id: "results"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "resultLabel",
+        id: "voteLabel1"
+      }, props.props.item1, " wins: ", wins1Num + 1), /*#__PURE__*/React.createElement("button", {
+        className: "totButton",
+        id: "seeNextButton",
+        onClick: getToken
+      }, "NEXT"), /*#__PURE__*/React.createElement("label", {
+        className: "resultLabel",
+        id: "voteLabel2"
+      }, props.props.item2, " wins: ", props.props.wins2))
+    );
+  } else if (props.props.item === props.props.item2) {
+    var wins2Num = parseInt(props.props.wins2);
+    return (/*#__PURE__*/React.createElement("div", {
+        id: "results"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "resultLabel",
+        id: "voteLabel1"
+      }, props.props.item1, " wins: ", props.props.wins1), /*#__PURE__*/React.createElement("button", {
+        className: "totButton",
+        id: "seeNextButton",
+        onClick: getToken
+      }, "NEXT"), /*#__PURE__*/React.createElement("label", {
+        className: "resultLabel",
+        id: "voteLabel2"
+      }, props.props.item2, " wins: ", wins2Num + 1))
+    );
+  }
 };
 /*
 / ADDED - getVariables
-/ based on Luke's answer at
+/ loosely based on Luke's answer at
 / https://stackoverflow.com/questions/9856587/is-there-an-inverse-function-to-jquery-serialize
-/ essentially 'deserializes' a serialized string, back to an object
+/ essentially 'deserializes' a jQuery serialized string, back to an object
 */
 
 
@@ -145,10 +184,7 @@ var loadResults = function loadResults(data) {
     id: "resultsDiv"
   }, /*#__PURE__*/React.createElement(Results, {
     props: objData
-  }), /*#__PURE__*/React.createElement("button", {
-    id: "seeNextButton",
-    onClick: getToken
-  }, "See Next ToT")), document.querySelector("#voteTot"));
+  })), document.querySelector("#voteTot"));
 };
 
 var setup = function setup(csrf) {

@@ -56,6 +56,12 @@ const TotSchema = new mongoose.Schema({
     ref: 'Account',
   },
 
+  ownerUsername: {
+    type: String,
+    required: true,
+    ref: 'Account',
+  },
+
   createdData: {
     type: Date,
     default: Date.now,
@@ -79,7 +85,7 @@ TotSchema.statics.findByOwner = (ownerId, callback) => {
   return TotModel.find(search).select('item1 item2 wins1 wins2').lean().exec(callback);
 };
 
-TotSchema.statics.findAll = (callback) => TotModel.find().select('item1 item2 wins1 wins2 id').lean().exec(callback);
+TotSchema.statics.findAll = (callback) => TotModel.find().select('owner ownerUsername item1 item2 wins1 wins2 id').lean().exec(callback);
 
 TotModel = mongoose.model('Tot', TotSchema);
 

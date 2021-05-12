@@ -9,6 +9,7 @@ const handleLogin = (e) => {
     }
 
     console.log($("input[name=_csrf]").val());
+    console.log($("#loginForm").serialize());
 
     sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 

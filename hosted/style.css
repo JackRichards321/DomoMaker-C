@@ -17,7 +17,9 @@ html, body {
 nav {
     width: 100%;
     height: 50px;
-    background-color: #55acee;
+    background-color: #ddd;
+    border-color: #333;
+    border-radius: 5px;
 }
 
 nav:nth-child(1) {
@@ -28,32 +30,32 @@ nav:nth-child(1) {
     padding: 5px;
     padding-top: 12px;
     padding-left: 20px;
-    color: white;
+    color: black;
     font-size: 1.3em;
     float: left;
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #ddd;
     transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    background-color: #ddd;
 }
 
 .totForm {
-    border: 2px solid #338acc;
+    border: 2px solid #333;
     height: 35px;
     width: 700px;
     margin-top:0px;
     padding-top:10px;
-    background-color: #55acee;
+    background-color: #ddd;
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -63,31 +65,28 @@ nav:nth-child(1) {
     width: 75px;
     margin-left: 10px;
     font-size: 1.2em;
-    float: left;
-    color: white;
+    color: black;
 }
 
-.totForm input[type=text] {
-    float:left;
-}
 
-.makeTotSubmit {
+
+.totButton {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
-    background-color: #55acee;
+    background-color: #ddd;
     border-radius: 2px;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
-.makeTotSubmit:link, .makeTotSubmit:visited, .makeTotSubmit:hover, .makeTotSubmit:active {
-    color: white;
+.totButton:link, .totButton:visited, .totButton:hover, .totButton:active {
+    color: black;
 }
 
-.makeTotSubmit:hover {
+.totButton:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #fff;
 }
 
 .mainForm {
@@ -118,24 +117,24 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #55acee;
+    background-color: #ddd;
     border-radius: 2px;
-    border-color: #66acee;
+    border-color: #333;
     padding: 3px 0px;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+    color: black;
 }
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: #ddd;
 }
 
-#user, #pass, #pass2 {
+#user, #pass, #pass2, #newPass, #oldPass {
     text-align: center;
     font-size: 1.1em;
     width: 180px;
@@ -144,7 +143,7 @@ nav:nth-child(1) {
 
 #user:focus, #pass:focus, #pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    box-shadow: 0px 0px 1px 1px #ddd;
 }
 
 #totMessage {
@@ -190,22 +189,27 @@ nav:nth-child(1) {
 }
 
 #tots {
-    width: 40%;
+    width: 80%;
     min-width: 400px;
-    border: 2px solid #55acee;
+    border: 2px solid #ddd;
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
 }
 
+.totList {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;  
+    grid-auto-flow: row;
+    grid-gap: 5px;
+}
+
 .tot {
     width: 95%;
-    margin: 0 auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #55acee;
+    border: 2px solid #333;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #ddd;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
@@ -213,9 +217,9 @@ nav:nth-child(1) {
 
 .tot:hover {
     transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
+    border-color: #333;
     transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
+    background-color: #ddd;
 }
 
 img.totFace {
@@ -259,4 +263,119 @@ h3.totAge {
 
 .tot:last-child {
     margin-bottom:10px;
+}
+
+#ownerSection {
+    display: flex;
+    direction: row;
+}
+
+.totOwner {
+    margin-left: 8px;
+}
+
+#voteSection {
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#voteForm {
+    display: flex;
+    justify-content: center;
+}
+
+#voteForm label {
+    display: inline-block;
+    width: 500px;
+    height: 200px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+#voteForm input[type="radio"] {
+    display: none;
+}
+
+#voteForm input[type="radio"]:checked + label {
+    border: solid 2px navy;
+}
+
+#voteLabel1 {
+    background-color: red;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+#voteLabel1:hover {
+    background-color: pink;
+}
+
+#voteLabel2 {
+    background-color: #15b0f6;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+#voteLabel2:hover {
+    background-color: #7dF9FF;
+}
+
+#results {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+}
+
+.resultLabel:hover {
+    background-color: default !important;
+}
+
+.resultLabel {
+    font-size: 2em !important;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+}
+
+#error {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+#advertisement {
+    float: center;
+    text-align: center;
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    border-radius: 5px;
+    width: 40%;
+    height: 10%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#changePassButton {
+    margin: 10px;
+}
+
+#changePassSubmit {
+    margin-left: 10px;
+}
+
+#changePassForm {
+    margin: 20px;
+}
+
+#seeNextButton {
+    font-size: 1em;
+    height: 200px;
+}
+
+#voteSubmitButton {
+    height: 200px;
 }
