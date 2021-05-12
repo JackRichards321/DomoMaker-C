@@ -1,6 +1,8 @@
 "use strict";
 
 // const { Account } = require("../../server/models");
+// delete button for when it works:
+// <button className="totButton" id="deleteButton" onClick={ () => handleDelete(tot, props.csrf) }>Delete</button>
 var TotList = function TotList(props) {
   // console.log(props);
   if (props.tots.length === 0) {
@@ -27,17 +29,11 @@ var TotList = function TotList(props) {
         className: "totItem"
       }, " Item 1: ", tot.item1, " | Wins: ", tot.wins1, " "), /*#__PURE__*/React.createElement("h3", {
         className: "totItem"
-      }, " Item 2: ", tot.item2, " | Wins: ", tot.wins2, " "), /*#__PURE__*/React.createElement("button", {
-        className: "totButton",
-        id: "deleteButton",
-        onClick: function onClick() {
-          return handleDelete(tot, props.csrf);
-        }
-      }, "Delete"))
+      }, " Item 2: ", tot.item2, " | Wins: ", tot.wins2, " "))
     );
   });
   return (/*#__PURE__*/React.createElement("div", {
-      className: "totList"
+      className: "totListAdmin"
     }, totNodes)
   );
 };

@@ -1,5 +1,8 @@
 // const { Account } = require("../../server/models");
 
+// delete button for when it works:
+// <button className="totButton" id="deleteButton" onClick={ () => handleDelete(tot, props.csrf) }>Delete</button>
+
 const TotList = function(props) {
     // console.log(props);
     if (props.tots.length === 0) {
@@ -19,13 +22,13 @@ const TotList = function(props) {
                 </section>
                 <h3 className="totItem"> Item 1: {tot.item1} | Wins: {tot.wins1} </h3>
                 <h3 className="totItem"> Item 2: {tot.item2} | Wins: {tot.wins2} </h3>
-                <button className="totButton" id="deleteButton" onClick={ () => handleDelete(tot, props.csrf) }>Delete</button>
+                
             </div>
         );
     });
 
     return (
-        <div className="totList">
+        <div className="totListAdmin">
             {totNodes}
         </div>
     );

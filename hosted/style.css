@@ -375,3 +375,7 @@ h3.totAge {
 .totList {
     height: 60%;
 }
+
+.totListAdmin {
+    height: auto;
+}
