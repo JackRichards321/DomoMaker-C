@@ -58,7 +58,7 @@ const TotSchema = new mongoose.Schema({
 
   ownerUsername: {
     type: String,
-    required: true,
+    required: false,
     ref: 'Account',
   },
 
